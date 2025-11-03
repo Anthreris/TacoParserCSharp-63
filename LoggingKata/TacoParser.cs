@@ -18,20 +18,18 @@
             if (cells.Length < 3)
             {
                 // Log error message and return null
+                logger.LogError("Invalid information. Needs more than three inputs in the array.");
                 return null; 
             }
 
             // TODO: Grab the latitude from your array at index 0
-            // You're going to need to parse your string as a `double`
-            // which is similar to parsing a string as an `int`
-            
+            var latitude = double.Parse(cells[0]);
             
             // TODO: Grab the longitude from your array at index 1
-            // You're going to need to parse your string as a `double`
-            // which is similar to parsing a string as an `int`
-            
+            var longitude = double.Parse(cells[1]);
             
             // TODO: Grab the name from your array at index 2
+            var name = cells[2];
             
 
             // TODO: Create a TacoBell class
