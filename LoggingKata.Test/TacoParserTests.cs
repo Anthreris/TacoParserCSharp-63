@@ -16,7 +16,6 @@ namespace LoggingKata.Test
 
             //Assert
             Assert.NotNull(actual);
-
         }
 
         [Theory]
@@ -31,14 +30,28 @@ namespace LoggingKata.Test
             //       represents a TacoBell location
 
             //Arrange
+            var tacoParser = new TacoParser();
 
             //Act
+            var actual = tacoParser.Parse(line).Location.Longitude;
 
             //Assert
+            Assert.Equal(expected, actual);
         }
-
-
+        
         //TODO: Create a test called ShouldParseLatitude
+
+        public void ShouldParseLatitude(string line, double expected)
+        {
+            //Arrange
+            var tacoParser = new TacoParser();
+            
+            //Act
+            var actual = tacoParser.Parse(line).Location.Latitude;
+            
+            //Assert
+            Assert.Equal(expected, actual);
+        }
 
     }
 }
