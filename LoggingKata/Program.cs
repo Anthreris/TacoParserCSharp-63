@@ -20,6 +20,14 @@ namespace LoggingKata
             // Use File.ReadAllLines(path) to grab all the lines from your csv file. 
             // Optional: Log an error if you get 0 lines and a warning if you get 1 line
             var lines = File.ReadAllLines(csvPath);
+            if (lines.Length == 0)
+            {
+                logger.LogError("Error: There aren't any usable lines avaiable");
+            }
+            else if (lines.Length == 1)
+            {
+                logger.LogWarning("Warning: Only 1 line is usable, you need more.");
+            }
 
             // This will display the first item in your lines array
             logger.LogInfo($"Lines: {lines[0]}");
@@ -29,7 +37,6 @@ namespace LoggingKata
 
             // Use the Select LINQ method to parse every line in lines collection
             var locations = lines.Select(line => parser.Parse(line)).ToArray();
-
   
             // Complete the Parse method in TacoParser class first and then START BELOW ----------
 
@@ -37,6 +44,9 @@ namespace LoggingKata
             // These will be used to store your two Taco Bells that are the farthest from each other.
             
             // TODO: Create a `double` variable to store the distance
+            ITrackable tacoBell = null;
+            ITrackable tacoBell2 = null;
+            double distance = 0;
 
             // TODO: Add the Geolocation library to enable location comparisons: using GeoCoordinatePortable;
             // Look up what methods you have access to within this library.
@@ -47,6 +57,29 @@ namespace LoggingKata
             // TODO: Create a loop to go through each item in your collection of locations.
             // This loop will let you select one location at a time to act as the "starting point" or "origin" location.
             // Naming suggestion for variable: `locA`
+            for (int i = 0; i < locations.Length; i++)
+            {
+                var locA = locations[i];
+                var corA = new GeoCoordinate();
+                corA.Latitude = locA.Location.Latitude;
+                corA.Longitude = locA.Location.Longitude;
+
+                for (int x = 0; x < locations.Length; x++)
+                {
+                    var locB = locations[x];
+                    var corB = new GeoCoordinate();
+                    corB.Latitude = locB.Location.Latitude;
+                    corB.Longitude = locB.Location.Longitude;
+
+                    if (corA.GetDistanceTo(corB) > distance)
+                    {
+                        distance = corA.GetDistanceTo(corB);
+                        tacoBell = locA;
+                        tacoBell2 = locB;
+                    }
+                }
+                
+            }
 
             // TODO: Once you have locA, create a new Coordinate object called `corA` with your locA's latitude and longitude.
 
