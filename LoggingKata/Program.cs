@@ -97,6 +97,8 @@ namespace LoggingKata
 
             // Once you've looped through everything, you've found the two Taco Bells farthest away from each other.
             // Display these two Taco Bell locations to the console.
+            
+            logger.LogInfo($"{tacoBell.Name} and {tacoBell2.Name} have the greatest distance between them out of all the tacobells on this list.");
 
 
             
