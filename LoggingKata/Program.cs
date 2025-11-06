@@ -17,7 +17,7 @@ namespace LoggingKata
             var lines = File.ReadAllLines(csvPath);
             if (lines.Length == 0)
             {
-                logger.LogError("Error: There aren't any usable lines avaiable");
+                logger.LogError("Error: There aren't any usable lines available");
             }
             else if (lines.Length == 1)
             {
